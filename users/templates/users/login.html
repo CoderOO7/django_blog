@@ -1,0 +1,45 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<section class="login">
+    <div class="flex w-full h-screen">
+        <div class="w-0 md:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full max-w-md mx-auto flex flex-col justify-center px-8">
+            <form class="login-form w-full" method="POST">
+                {% csrf_token %}
+                <fieldset class="flex flex-col justify-center space-y-4">
+                    <legend class="text-center font-bold text-3xl">Welcome</legend>
+                    {% if messages %}
+                    <ul class="notification text-white text-center">
+                        {% for message in messages %}
+                        <li class="p-1 bg-green-400 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} bg-red-400{% endif %}">{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="flex flex-col text-sm">
+                        <label for="">{{form.email.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="email" name="email" id="email" required placeholder="Your email"/>
+                    </div>
+                    <div class="flex flex-col text-sm">
+                        <label for="">{{form.password1.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="password" name="password1" id="password1" required placeholder="Your password"/>
+                    </div>
+                    <button class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
+                            type="submit">Login
+                    </button>
+                </fieldset>
+                <div class="text-center mt-2">
+                    <small>Don't have an account yet? <a class="text-blue-700 hover:underline"
+                                                         href="{% url 'users-register' %}">Register</a></small>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}
