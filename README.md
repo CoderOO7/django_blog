@@ -14,7 +14,7 @@ It's a blog app made in django for playing with django framework.
     ```bash
     $ git clone https://github.com/CoderOO7/django_blog.git
     $ cd django_blog
-    $ python3.7 -m venv venv
+    $ virtualenv -p <python3.7 binary path> venv
     $ source venv/bin/activate
     $ pip install -r requirements.txt
      ```
@@ -30,7 +30,7 @@ It's a blog app made in django for playing with django framework.
       DATABASE_PORT=8000
       DATABASE_ENGINE=django.db.backends.mysql
      ```
-4. Make migrations and create super user
+4. Get back to root directory to perform database migrations and create super user
     ```bash
     $ python manage.py makemigrations
     $ python manage.py migrate
