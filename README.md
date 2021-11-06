@@ -6,7 +6,7 @@ It's a blog app made in django for playing with django framework.
 * python 3.7.5+
 * pip
 * MySQL
-* npm 
+* npm/node
 
 ## Running the app
 
@@ -32,7 +32,6 @@ It's a blog app made in django for playing with django framework.
      ```
 4. Get back to root directory to perform database migrations and create super user
     ```bash
-    $ python manage.py makemigrations
     $ python manage.py migrate
     $ python manage.py createsuperuser
     ```
@@ -40,4 +39,9 @@ It's a blog app made in django for playing with django framework.
 5. At last run the server
    ```
    python manage.py runserver
+   ```
+
+6. Spin tailwind server
+   ```
+   python manage.py tailwind start
    ```
