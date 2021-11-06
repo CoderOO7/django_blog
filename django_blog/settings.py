@@ -9,18 +9,23 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os.path
+import environ
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env= environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!_53jd1rg*m(-98cn_iny80-zgel$yzv)v!mt)z7t8kzc2#p^d'
+SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,11 +86,11 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_blog',
-        'USER': 'root',
-        'PASSWORD': 'admin1234',
-        'HOST': 'localhost',
-        'PORT': '8000',
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': env("DATABASE_HOST"),
+        'PORT': env("DATABASE_PORT"),
     },
 }
 
@@ -134,10 +139,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/assets/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, "static"),
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, f'static{MEDIA_URL}')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

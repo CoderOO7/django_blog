@@ -32,11 +32,11 @@ class MyAccountManager(BaseUserManager):
 
 
 def get_profile_image_file_path(self, filename):
-    return f'profile_images/{self.pk}/{"profile_image.png"}'
+    return f'images/profile-images/{self.pk}-{filename}'
 
 
 def get_default_profile_image():
-    return f"{settings.STATIC_URL}images/user-avatar.png"
+    return "images/profile-images/user-avatar.jpeg"
 
 
 class Account(AbstractBaseUser):
@@ -51,6 +51,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_file_path, null=True, blank=True,
                                       default=get_default_profile_image)
+    # profile_image = models.ImageField(max_length=255, null=True, blank=True)
     hide_email = models.BooleanField(default=True)
 
     # bind that AccountManager to our model
@@ -65,6 +66,9 @@ class Account(AbstractBaseUser):
 
     def get_profile_image_filename(self):
         return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
+
+    def get_full_name(self):
+        return f'${self.first_name.capitalize()} {self.last_name.capitalize()}'
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
