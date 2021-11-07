@@ -59,7 +59,7 @@ class Account(AbstractBaseUser):
 
     # Allow to use email to login instead of username
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
