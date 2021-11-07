@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.templatetags.static import static
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
@@ -21,7 +22,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, first_name, last_name):
+    def create_superuser(self, email, password, first_name=' ', last_name=' '):
         user = self.create_user(email=self.normalize_email(email), first_name=first_name, last_name=last_name,
                                 password=password)
         user.is_admin = True
@@ -32,14 +33,14 @@ class MyAccountManager(BaseUserManager):
 
 
 def get_profile_image_file_path(self, filename):
-    return f'images/profile-images/{self.pk}-{filename}'
+    return f'images/profiles/{self.pk}-{filename}'
 
 
 def get_default_profile_image():
-    return "images/profile-images/user-avatar.jpeg"
-
+    return 'images/profiles/user-avatar.jpeg'
 
 class Account(AbstractBaseUser):
+    username = None
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     first_name = models.CharField(default='', max_length=30)
     last_name = models.CharField(default='', max_length=30)
@@ -51,7 +52,6 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_file_path, null=True, blank=True,
                                       default=get_default_profile_image)
-    # profile_image = models.ImageField(max_length=255, null=True, blank=True)
     hide_email = models.BooleanField(default=True)
 
     # bind that AccountManager to our model
@@ -59,13 +59,13 @@ class Account(AbstractBaseUser):
 
     # Allow to use email to login instead of username
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['first_name','last_name']
 
     def __str__(self):
         return self.email
 
     def get_profile_image_filename(self):
-        return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
+        return str(self.profile_image)[str(self.profile_image).index(f'images/profiles/{self.pk}/'):]
 
     def get_full_name(self):
         return f'${self.first_name.capitalize()} {self.last_name.capitalize()}'

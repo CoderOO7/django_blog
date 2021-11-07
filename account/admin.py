@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from account.models import Account
+from django.utils.translation import ugettext_lazy as _
 
 
 class AccountAdmin(UserAdmin):
@@ -10,7 +11,17 @@ class AccountAdmin(UserAdmin):
 
     filter_horizontal = ()
     list_filter = ()
-    fieldsets = ()
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name','profile_image')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2'),
+        }),
+    )
     ordering = ('email',)
 
 
