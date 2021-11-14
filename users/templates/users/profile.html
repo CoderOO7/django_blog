@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<section class="profile p-8">
+    <div class="flex flex-col justify-center">
+        <form class="profile-edit-form max-w-prose mx-auto" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if messages %}
+            <ul class="notification text-white text-center text-sm">
+                {% for message in messages %}
+                <li class="bg-green-100 rounded-lg p-4 mb-4 text-green-700 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} bg-red-100 text-red-700 {% endif %}">
+                    {{message}}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <fieldset class="space-y-4 px-8 py-4 border-2 rounded-md">
+                <legend class="form-header flex gap-2 items-center px-2">
+                    <div class="relative">
+                        <img class="rounded-full w-32 h-32"
+                             src="{{ user.profile.image.url }}"
+                             alt="User Profile Image"/>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold">{{user.get_full_name}}</p>
+                        <small class="text-gray-500">{{ user.email }}</small>
+                    </div>
+                </legend>
+                <div class="flex flex-col md:flex-row gap-2 text-sm">
+                    <div class="flex flex-col">
+                        <label for="first_name">{{u_form.first_name.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="text" name="first_name" id="first_name" value="{{ user.first_name }}"
+                               placeholder="Your first name"/>
+
+                        {% if u_form.errors.first_name %}
+                        <span class="text-red-700 py-1 px-2">{{u_form.errors.first_name}}</span>
+                        {% endif %}
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="last_name">{{u_form.last_name.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="text" name="last_name" id="last_name" value="{{ user.last_name }}"
+                               placeholder="Your last name"/>
+                        {% if u_form.errors.last_name %}
+                        <span class="text-red-700 py-1 px-2">{{u_form.errors.last_name}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex flex-col text-sm">
+                    <label for="email">{{u_form.email.label}}</label>
+                    <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                           type="email" name="email" id="email" value="{{ user.email }}" placeholder="Your email"
+                           required/>
+                    {% if u_form.errors.email %}
+                    <span class="text-red-700 py-1 px-2">{{u_form.errors.email}}</span>
+                    {% endif %}
+                </div>
+                <div class="flex flex-col text-sm">
+                    <label for="profile_image_upload">Update Image</label>
+                    <input class='rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600' type="file" id="profile_image_upload" name="image" accept="image/*"/>
+                    {% if p_form.errors.image %}
+                    <span class="text-red-700 px-2 py-1">{{p_form.errors.image}}</span>
+                    {% endif %}
+                </div>
+                <button class="rounded-md p-2 w-full bg-blue-600 hover:bg-blue-500 text-white">Save Profile
+                    Information
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</section>
+{% endblock content %}

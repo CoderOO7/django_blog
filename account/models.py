@@ -59,7 +59,7 @@ class Account(AbstractBaseUser):
         return str(self.profile_image)[str(self.profile_image).index(f'images/profiles/{self.pk}/'):]
 
     def get_full_name(self):
-        return f'${self.first_name.capitalize()} {self.last_name.capitalize()}'
+        return f'{self.first_name.capitalize()} {self.last_name.capitalize()}'
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
