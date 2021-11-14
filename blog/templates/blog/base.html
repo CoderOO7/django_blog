@@ -51,12 +51,12 @@
                                 <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
                                     <div class="py-1 " role="menu" aria-orientation="vertical"
                                          aria-labelledby="options-menu">
-                                        <a href="#"
+                                        <a href="{% url 'users-profile' %}"
                                            class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                                            role="menuitem">
                                                             <span class="flex flex-col">
                                                                 <span>
-                                                                    Settings
+                                                                    Profile
                                                                 </span>
                                                             </span>
                                         </a>
@@ -120,15 +120,15 @@
     </div>
 </nav>
 <main class="max-w-7xl mx-auto p-8 min-h-screen">
-    {% if messages %}
-    <div class="alert-container">
-        {% for message in messages %}
-        <div class="alert p-2 bg-green-200">
-            {{message}}
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
+<!--    {% if messages %}-->
+<!--    <div class="alert-container">-->
+<!--        {% for message in messages %}-->
+<!--        <div class="alert p-2 bg-green-200">-->
+<!--            {{message}}-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+<!--    {% endif %}-->
     {% block content %} {% endblock %}
 </main>
 </body>
