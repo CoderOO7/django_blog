@@ -7,7 +7,12 @@
             <form class="register-form w-full" method="POST">
                 {% csrf_token %}
                 <fieldset class="flex flex-col justify-center space-y-4">
+                    {% url 'create-post' as 'create_post_url' %}
+                    {% if request.path == create_post_url %}
                     <legend class="font-bold text-2xl">Create New Post</legend>
+                    {% else %}
+                    <legend class="font-bold text-2xl">Edit Post</legend>
+                    {% endif %}
                     <div class="flex flex-col gap-2 text-sm">
                         <div class="flex flex-col">
                             <label for="title">{{form.title.label}}</label>
@@ -18,7 +23,7 @@
                             <label for="content">{{form.content.label}}</label>
                             <textarea
                                     class="rounded-md p-2 text-sm border h-3/4 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-                                    type="textarea" name="content" id="content"  rows="22">{{form.content.value|default:''}}</textarea>
+                                    type="textarea" name="content" id="content" rows="22">{{form.content.value|default:''}}</textarea>
                         </div>
                     </div>
                     <button class="py-2 px-8 mt-4 mr-auto bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
