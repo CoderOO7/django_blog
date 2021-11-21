@@ -19,9 +19,6 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
   model = Post
-  # template_name = 'blog/post.html'
-  # context_object_name = 'posts'
-  # ordering = ['-date_posted']
 
 class PostCreateView(LoginRequiredMixin, CreateView):
   model = Post
