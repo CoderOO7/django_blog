@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
 import environ
-
+import django_heroku
+import dj_database_url
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,9 +30,9 @@ environ.Env.read_env()
 SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG",default='FALSE')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hasblog.herokuapp.com','127.0.0.1']
 TAILWIND_APP_NAME = 'theme'
 
 # Application definition
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'tailwind',
     'ckeditor',
     'theme.apps.ThemeConfig',
+    'whitenoise.runserver_nostatic',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'django_blog.urls'
@@ -82,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -96,6 +99,9 @@ DATABASES = {
         'PORT': env("DATABASE_PORT"),
     },
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 AUTH_USER_MODEL = "account.Account"
@@ -148,6 +154,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -165,3 +172,6 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS', default='FALSE')
 EMAIL_USE_SSL = env('EMAIL_USE_SSL', default='FALSE')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
