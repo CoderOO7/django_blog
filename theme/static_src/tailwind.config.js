@@ -51,7 +51,14 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'icon-google': "url('/static/assets/icons/google.svg')",
+                'icon-github': "url('/static/assets/icons/github.svg')",
+                'icon-twitter': "url('/static/assets/icons/twitter.svg')",
+                'icon-linkedin': "url('/static/assets/icons/linkedin.svg')",
+            }
+        },
     },
     variants: {
         extend: {},

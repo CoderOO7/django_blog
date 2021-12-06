@@ -1,6 +1,7 @@
 {% extends 'users/base.html' %}
 {% load static %}
 {% block content %}
+{% load socialaccount %}
 <section class="login">
     <div class="flex w-full h-screen">
         <div class="w-0 md:w-1/2">
@@ -13,10 +14,21 @@
                 {% csrf_token %}
                 <fieldset class="flex flex-col justify-center space-y-4">
                     <legend class="text-center font-bold text-3xl">Welcome</legend>
+                    <div class="text-center">
+                        <p class="font-medium">To continue login to hasblog</p>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'google' %}">
+                            <span class="text-center w-6 h-6 bg-icon-google"></span>
+                            Continue with Google
+                        </a>
+                    </div>
+                    <hr class="border-gray-300"/>
                     {% if messages %}
                     <ul class="notification text-white text-center">
                         {% for message in messages %}
-                        <li class="p-1 bg-green-100 text-green-700 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} bg-red-100 text-red-700{% endif %}">{{message}}</li>
+                        <li class="p-1 bg-green-100 text-green-700 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} bg-red-100 text-red-700{% endif %}">
+                            {{message}}
+                        </li>
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -37,7 +49,8 @@
                 <div class="flex flex-col gap-1 text-center mt-2">
                     <small>Don't have an account yet? <a class="text-blue-700 hover:underline"
                                                          href="{% url 'users-register' %}">Register</a></small>
-                    <small><a href="{% url 'users-password-reset' %}" class="text-blue-700">I forgot my password</a></small>
+                    <small><a href="{% url 'users-password-reset' %}" class="text-blue-700">I forgot my
+                        password</a></small>
                 </div>
             </form>
         </div>

@@ -1,12 +1,5 @@
 from django.db import models
-from django.conf import settings
-from django.templatetags.static import static
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
-
-# create a newuser
-# create a supseruser
-
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, email, password):
