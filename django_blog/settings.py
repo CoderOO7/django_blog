@@ -83,7 +83,7 @@ ROOT_URLCONF = 'django_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'templates/allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -177,10 +177,11 @@ INTERNAL_IPS = [
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 EMAIL_PORT = env('EMAIL_PORT', default='1025')
-EMAIL_USE_TLS = env('EMAIL_USE_TLS', default='FALSE')
-EMAIL_USE_SSL = env('EMAIL_USE_SSL', default='FALSE')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=False)
+EMAIL_USE_SSL = env('EMAIL_USE_SSL', default=False)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+
 
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
@@ -193,6 +194,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_SIGNUP_REDIRECT_URL = '/accounts/login/'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+SOCIALACCOUNT_STORE_TOKENS = False
+# ACCOUNT_SESSION_REMEMBER = False
 
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -214,6 +219,10 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         }
     }
+}
+
+ACCOUNT_FORMS = {
+'signup': 'users.forms.UserRegisterForm',
 }
 
 # Activate Django-Heroku.

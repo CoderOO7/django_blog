@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 from account.models import Account
 from PIL import Image
 import uuid
