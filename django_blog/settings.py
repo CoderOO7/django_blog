@@ -174,6 +174,9 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+# ****************************** #
+#    EMAIL SMTP Server Config    #
+# ****************************** #
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 EMAIL_PORT = env('EMAIL_PORT', default='1025')
@@ -183,10 +186,11 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 
+# ****************************** #
+#       allAuth Config           #
+# ****************************** #
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
-
-# Additional configuration settings
 ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
@@ -195,22 +199,12 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_SIGNUP_REDIRECT_URL = '/accounts/login/'
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 SOCIALACCOUNT_STORE_TOKENS = False
-# ACCOUNT_SESSION_REMEMBER = False
-
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-    'twitter': {
         'SCOPE': [
             'profile',
             'email',

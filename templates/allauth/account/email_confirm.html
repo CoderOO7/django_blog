@@ -1,0 +1,39 @@
+{% extends "users/base.html" %}
+{% load account %}
+{% load static %}
+
+{% block content %}
+<section class="password-reset-done">
+    <div class="flex w-full h-screen">
+        <div class="w-0 md:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto flex flex-col justify-center items-center gap-8 px-16">
+            <h3 class="text-3xl font-bold text-center mb-4">Confirm Email address</h3>
+            {% if confirmation %}
+            {% user_display confirmation.email_address.email as email %}
+            <p>Please confirm that <a class="text-blue-600 hover:underline" href="mailto:{{ email }}">{{ email }}</a> is
+                an e-mail address using which user sign up.
+            </p>
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                {% csrf_token %}
+                <button type="submit" class="p-2 mt-4 w-52 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md">
+                    Confirm
+                </button>
+            </form>
+
+            {% else %}
+
+            {% url 'account_email' as email_url %}
+
+            <p>This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}" class="text-blue-600 hover:underline">issue
+                a new e-mail confirmation request</a>.</p>
+
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+{% endblock content %}
