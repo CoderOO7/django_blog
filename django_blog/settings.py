@@ -189,7 +189,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 # ****************************** #
 #       allAuth Config           #
 # ****************************** #
-SITE_ID = 2
+SITE_ID = env('SITE_ID', default=1)
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
