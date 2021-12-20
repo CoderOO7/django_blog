@@ -1,0 +1,35 @@
+{% extends "socialaccount/base.html" %}
+{% load static %}
+{% block content %}
+<section class="password-reset">
+    <div class="flex w-full h-screen">
+        <div class="w-0 md:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full max-w-screen-md mx-auto flex flex-col justify-center px-8 gap-2">
+            <h3 class="w-full font-bold text-4xl mb-4">Register</h3>
+            <p>{% with provider_name=account.get_provider.name site_name=site.name %}
+                You are about to use your
+                {{provider_name}} account to login to
+                {{site_name}}. As a final step, please complete the following form:{% endwith %}</p>
+            <form class="login-form w-full" method="POST" action="{% url 'socialaccount_signup' %}">
+                {% csrf_token %}
+                <div class="flex flex-col text-sm">
+                    <label for="email">{{form.email.label}}</label>
+                    <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                           type="email" name="email" id="email" value="{{form.email.value}}" required placeholder="Your account email"/>
+                    <span class="text-red-700 py-1 px-2">{{form.errors.email}}</span>
+                </div>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
+                        type="submit">Register
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}
