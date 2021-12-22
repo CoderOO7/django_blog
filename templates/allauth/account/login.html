@@ -54,6 +54,11 @@
                                type="password" name="password" id="password" required placeholder="Your password"
                                autocomplete="current-password"/>
                     </div>
+                    <div class="flex gap-2 text-sm items-center">
+                        <input class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                               type="checkbox" name="remember" id="remember">
+                        <label for="remember">{{form.remember.label}}</label>
+                    </div>
                     <button class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
                             type="submit">Login
                     </button>
