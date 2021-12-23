@@ -1,0 +1,17 @@
+{% extends "socialaccount/base.html" %}
+{% load static %}
+{% block content %}
+<section class="social-account-login-failure">
+    <div class="flex w-full h-screen">
+        <div class="w-0 md:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full max-w-screen-md mx-auto flex flex-col justify-center px-8 gap-2">
+            <h3 class="w-full font-bold text-3xl mb-4">Social Network Login Failure</h3>
+            <p>An error occurred while attempting to login via your social network account.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

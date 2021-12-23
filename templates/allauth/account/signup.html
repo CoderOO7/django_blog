@@ -4,12 +4,12 @@
 {% block content %}
 <section class="register">
     <div class="flex w-full h-screen">
-        <div class="w-0 md:w-1/2">
+        <div class="w-0 lg:w-1/2">
             <img class="w-full h-full object-center"
                  src="{% static 'assets/images/register-background.jpeg' %}"
                  alt=""/>
         </div>
-        <div class="w-full max-w-md mx-auto flex items-center px-8">
+        <div class="w-full max-w-md mx-auto flex items-center">
             <form class="register-form w-full" method="POST">
                 {% csrf_token %}
                 <fieldset class="flex flex-col justify-center space-y-4">
@@ -21,17 +21,17 @@
                             <span class="text-center w-6 h-6 bg-icon-google"></span>
                             Register with Google
                         </a>
-<!--                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"-->
-<!--                           href="{% provider_login_url 'github' %}"><span class="w-6 h-6 bg-icon-github"></span>Register-->
-<!--                            with-->
-<!--                            Github-->
-<!--                        </a>-->
-<!--                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"-->
-<!--                           href="{% provider_login_url 'twitter' %}"><span class="w-6 h-6 bg-icon-twitter"></span>Register-->
-<!--                            with-->
-<!--                            Twitter-->
-<!--                        </a>-->
-                        <hr class="my-4 border border-gray-300"/>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'github' %}"><span class="w-6 h-6 bg-icon-github"></span>Register
+                            with
+                            Github
+                        </a>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'twitter' %}"><span class="w-6 h-6 bg-icon-twitter"></span>Register
+                            with
+                            Twitter
+                        </a>
+                        <hr class="my-4 border-gray-400"/>
                         <p class="text-xl font-medium">Register with your email address</p>
                     </div>
                     {% if form.non_field_errors %}
