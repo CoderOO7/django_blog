@@ -4,12 +4,12 @@
 {% block content %}
 <section class="login">
     <div class="flex w-full h-screen">
-        <div class="w-0 md:w-1/2">
+        <div class="w-0 lg:w-1/2">
             <img class="w-full h-full object-center"
                  src="{% static 'assets/images/register-background.jpeg' %}"
                  alt=""/>
         </div>
-        <div class="w-full max-w-md mx-auto flex flex-col justify-center px-8">
+        <div class="w-full max-w-md mx-auto flex flex-col justify-center">
             <form class="login-form w-full" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {% if redirect_field_value %}
@@ -33,7 +33,7 @@
                             with Twitter
                         </a>
                     </div>
-                    <hr class="border-gray-300"/>
+                    <hr class="border-gray-400"/>
                     {% if form.non_field_errors %}
                     <ul class="notification text-white">
                         {% for error in form.non_field_errors %}

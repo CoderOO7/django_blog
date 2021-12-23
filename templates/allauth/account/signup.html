@@ -4,12 +4,12 @@
 {% block content %}
 <section class="register">
     <div class="flex w-full h-screen">
-        <div class="w-0 md:w-1/2">
+        <div class="w-0 lg:w-1/2">
             <img class="w-full h-full object-center"
                  src="{% static 'assets/images/register-background.jpeg' %}"
                  alt=""/>
         </div>
-        <div class="w-full max-w-md mx-auto flex items-center px-8">
+        <div class="w-full max-w-md mx-auto flex items-center">
             <form class="register-form w-full" method="POST">
                 {% csrf_token %}
                 <fieldset class="flex flex-col justify-center space-y-4">
@@ -31,7 +31,7 @@
                             with
                             Twitter
                         </a>
-                        <hr class="my-4 border border-gray-300"/>
+                        <hr class="my-4 border-gray-400"/>
                         <p class="text-xl font-medium">Register with your email address</p>
                     </div>
                     {% if form.non_field_errors %}
