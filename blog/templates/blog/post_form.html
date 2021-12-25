@@ -2,32 +2,37 @@
 {% load static %}
 {% block content %}
 <section class="register">
-    <div class="flex w-full h-screen">
-        <div class="w-9/12 mx-auto flex px-8">
-            <form class="register-form w-full" method="POST">
+    <div class="flex w-full h-full">
+        <div class="mx-w-4xl mx-auto flex px-8">
+            <form class="register-form w-full h-full" method="POST">
                 {% csrf_token %}
                 {{form.media}}
-                <fieldset class="flex flex-col justify-center space-y-4">
-                    {% url 'create-post' as 'create_post_url' %}
+                <fieldset class="flex flex-col space-y-4">
+                    {% url 'post-create' as create_post_url %}
                     {% if request.path == create_post_url %}
                     <legend class="font-bold text-2xl">Create New Post</legend>
                     {% else %}
                     <legend class="font-bold text-2xl">Edit Post</legend>
                     {% endif %}
                     <div class="flex flex-col gap-4 text-sm">
-                        <div class="flex flex-col gap-1">
+                        <div class="grow flex flex-col gap-1">
                             <label for="title">{{form.title.label}}</label>
                             <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                    type="text" name="title" id="title" value="{{form.title.value|default:''}}"/>
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="grow flex flex-col gap-1">
                             <label>{{form.content.label}}</label>
                             {{form.content}}
                         </div>
                     </div>
-                    <button class="py-2 px-8 mt-4 mr-auto bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
-                            type="submit">Save
-                    </button>
+                    <div class="flex gap-4 mt-4">
+                        <a class="py-2 px-8 bg-gray-200 text-gray-900 hover:bg-gray-300 outline-none rounded-md hover:cursor-pointer"
+                                onclick="history.back()">Cancel
+                        </a>
+                        <button class="py-2 px-8 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
+                                type="submit">Save
+                        </button>
+                    </div>
                 </fieldset>
             </form>
         </div>
