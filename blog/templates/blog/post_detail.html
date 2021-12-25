@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <article class="post">
-    <div class="post__wrap max-w-md md:max-w-xl mx-auto p-4 mb-4 min-h-40 rounded-xl shadow-lg">
+    <div class="post__wrap max-w-4xl mx-auto p-8 mb-4 min-h-40 rounded-xl shadow-lg">
         <div class="post__meta flex items-center justify-between gap-2">
             <div class="flex gap-2">
                 <img class=" __meta_author-pic w-10 h-10 rounded-full object-center"
@@ -17,15 +17,16 @@
             </div>
             {% if request.user.id == object.author.id %}
             <div class="space-x-4">
-                <a class="__meta-post-delete text-red-600 hover:text-red-700 cursor-pointer"
-                   href="{% url 'post-delete' object.id %}">Delete</a>
+                <a class="__meta-post-delete  cursor-pointer"
+                   href="{% url 'post-delete' post.id %}"><span
+                        class="inline-block bg-icon-trash w-5 h-5 "></span></a>
                 <a class="__meta_post-edit text-gray-600 hover:text-gray-700 cursor-pointer"
-                   href="{% url 'post-update' object.id %}">Edit</a>
+                   href="{% url 'post-update' post.id %}"><span class="inline-block w-5 h-5 bg-icon-pencil"></span></a>
             </div>
             {% endif %}
         </div>
         <h3 class="post__title mt-4 text-2xl font-bold">{{object.title}}</h3>
-        <p>{{object.content|safe}}</p>
+        <p class="post__content mt-4">{{object.content|safe}}</p>
     </div>
 </article>
 {% endblock content %}

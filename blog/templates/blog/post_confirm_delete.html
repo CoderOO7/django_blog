@@ -1,25 +1,23 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-<section class="register">
-    <div class="flex w-full h-screen">
-        <div class="w-full max-w-md mx-auto flex px-8">
-            <form class="register-form w-full" method="POST">
-                {% csrf_token %}
-                <fieldset class="flex flex-col justify-center space-y-4">
-                    <legend class="font-bold text-2xl">Delete Post</legend>
-                    <h3 class="font-bold">Are you sure you want to delete the post "{{object.title}}"</h3>
-                    <div class="flex gap-2">
-                        <button class="p-2 text-center text-red-700 border border-red-700 hover:bg-red-700 hover:text-white outline-none rounded-md"
-                                type="submit">Delete
-                        </button>
-                        <a class="p-2 bg-gray-500 text-white text-center hover:bg-gray-600 outline-none rounded-md"
-                           href="{% url 'post-detail' object.id %}">Cancel
-                        </a>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+<section class="post-delete">
+    <div class="w-full max-w-xl mx-auto flex p-8 shadow-lg rounded-md">
+        <form class="register-form w-full" method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend class="font-bold text-2xl">Delete Post</legend>
+                <h3 class="font-medium mt-2">Are you sure you want to delete the post "{{object.title}}"</h3>
+                <div class="mt-6 flex gap-2">
+                    <button class="p-2 text-center text-red-700 border border-red-700 hover:bg-red-700 hover:text-white outline-none rounded-md"
+                            type="submit">Delete
+                    </button>
+                    <a class="p-2 bg-gray-500 text-white text-center hover:bg-gray-600 outline-none rounded-md"
+                       href="{% url 'post-detail' object.id %}">Cancel
+                    </a>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </section>
 {% endblock content %}
