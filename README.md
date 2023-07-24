@@ -13,7 +13,7 @@ It's a blog app made in django for playing with django framework.
 1. If the above tools are installed correctly then run below commands:
     ```bash
     $ git clone https://github.com/CoderOO7/django_blog.git
-    $ cd django_blog
+    $ cd config
     $ virtualenv -p <python3.7 binary path> venv
     $ source venv/bin/activate
     $ pip install -r requirements.txt
