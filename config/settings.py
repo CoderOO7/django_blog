@@ -32,7 +32,7 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ['hasblog.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['hasblog.herokuapp.com', '127.0.0.1', 'hasblog.onrender.com']
 TAILWIND_APP_NAME = 'theme'
 
 # Application definition
