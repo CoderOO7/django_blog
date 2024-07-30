@@ -1225,27 +1225,27 @@ select {
 }
 
 .bg-icon-google {
-  background-image: url('/static/assets/icons/google.svg');
+  background-image: url("/static/assets/icons/google.2986fcf85129.svg");
 }
 
 .bg-icon-github {
-  background-image: url('/static/assets/icons/github.svg');
+  background-image: url("/static/assets/icons/github.f699b05949b3.svg");
 }
 
 .bg-icon-twitter {
-  background-image: url('/static/assets/icons/twitter.svg');
+  background-image: url("/static/assets/icons/twitter.2aa94e55ade2.svg");
 }
 
 .bg-icon-user-circle {
-  background-image: url('/static/assets/icons/user-circle.svg');
+  background-image: url("/static/assets/icons/user-circle.0f2e21ae8dff.svg");
 }
 
 .bg-icon-trash {
-  background-image: url('/static/assets/icons/trash.svg');
+  background-image: url("/static/assets/icons/trash.bb48bfd075ad.svg");
 }
 
 .bg-icon-pencil {
-  background-image: url('/static/assets/icons/pencil.svg');
+  background-image: url("/static/assets/icons/pencil.40c800f52128.svg");
 }
 
 .object-center {
