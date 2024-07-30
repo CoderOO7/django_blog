@@ -1,2 +1,18 @@
 {% extends "blog/base.html" %}
-<h1>Blog About</h1>
+{% block content %}
+<section class="about">
+    <div class="about__card max-w-4xl mx-auto shadow-lg rounded-md p-8">
+        <h3 class="text-4xl font-medium text-center">hasBlog</h3>
+        <p class="mt-4 text-center text-xl font-medium">
+            Hasblog is the blogging platform that you allow to create your own blog and share your thoughts, ideas with
+            the world.
+        </p>
+        <p class="mt-2">
+            It's open source project made using django framework. Begin this to improve my django skills. The project is
+            under development. If you would like to contribute or need some reference regarding project code, <a
+                class="text-blue-600 underline hover:text-blue-700 hover:no-underline" href="https://github.com/coderoo7/django_blog">fork the repo</a> and play with source code.
+        </p>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "socialaccount/base.html" %}
+{% block content %}
+<section class="login-cancel">
+    <div class="flex w-full h-screen">
+        <div class="w-0 lg:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full max-w-screen-md mx-auto flex flex-col justify-center px-8 gap-2">
+            <h3 class="w-full font-bold text-3xl mb-4">Login Cancelled</h3>
+            {% url 'account_login' as login_url %}
+            <p>You decided to cancel logging in to our site using one of your existing accounts. If this was a
+                mistake, please proceed to <a class="text-blue-600 hover:text-blue-700" href="{{login_url}}">sign in</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

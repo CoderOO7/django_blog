@@ -1,0 +1,76 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% block content %}
+<section class="login">
+    <div class="flex w-full h-screen">
+        <div class="w-0 lg:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full max-w-md mx-auto flex flex-col justify-center">
+            <form class="login-form w-full" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <fieldset class="flex flex-col justify-center space-y-4">
+                    <legend class="w-full text-center font-bold text-3xl">Welcome</legend>
+                    <div class="text-center">
+                        <p class="font-medium">To continue login to hasblog</p>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'google' action='reauthenticate' %}">
+                            <span class="text-center w-6 h-6 bg-icon-google"></span>
+                            Continue with Google
+                        </a>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'github' %}"><span class="w-6 h-6 bg-icon-github"></span>Continue
+                            with Github
+                        </a>
+                        <a class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md flex items-center justify-center gap-4"
+                           href="{% provider_login_url 'twitter' %}"><span class="w-6 h-6 bg-icon-twitter"></span>Continue
+                            with Twitter
+                        </a>
+                    </div>
+                    <hr class="border-gray-400"/>
+                    {% if form.non_field_errors %}
+                    <ul class="notification text-white">
+                        {% for error in form.non_field_errors %}
+                        <li class="p-1 bg-red-100 text-red-700">
+                            {{error}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="flex flex-col text-sm">
+                        <label for="email">{{form.login.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="email" name="login" id="email" required placeholder="Your email"/>
+                    </div>
+                    <div class="flex flex-col text-sm">
+                        <label for="password">{{form.password.label}}</label>
+                        <input class="rounded-md p-2 text-sm border focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                               type="password" name="password" id="password" required placeholder="Your password"
+                               autocomplete="current-password"/>
+                    </div>
+                    <div class="flex gap-2 text-sm items-center">
+                        <input class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                               type="checkbox" name="remember" id="remember">
+                        <label for="remember">{{form.remember.label}}</label>
+                    </div>
+                    <button class="p-2 mt-4 bg-blue-600 text-white hover:bg-blue-700 outline-none rounded-md"
+                            type="submit">Login
+                    </button>
+                </fieldset>
+                <div class="flex flex-col gap-1 text-center mt-2">
+                    <small>Don't have an account yet? <a class="text-blue-700 hover:underline"
+                                                         href="{% url 'account_signup' %}">Register</a></small>
+                    <small><a href="{% url 'account_reset_password' %}" class="text-blue-700">I forgot my
+                        password</a></small>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

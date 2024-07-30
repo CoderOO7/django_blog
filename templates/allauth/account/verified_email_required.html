@@ -1,0 +1,29 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<section class="email-verification-sent">
+    <div class="flex w-full h-screen">
+        <div class="w-0 md:w-1/2">
+            <img class="w-full h-full object-center"
+                 src="{% static 'assets/images/register-background.jpeg' %}"
+                 alt=""/>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto flex flex-col justify-center px-16">
+            <h4 class="text-3xl font-bold text-center mb-4">Verify your email address</h4>
+
+            {% url 'account_email' as email_url %}
+
+            <p>This part of the site requires us to verify that
+                you are who you claim to be. For this purpose, we require that you
+                verify ownership of your e-mail address.</p>
+
+            <p>We have sent an e-mail to you for
+                verification. Please click on the link inside this e-mail. Please
+                contact us if you do not receive it within a few minutes.</p>
+
+            <p><strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail
+                address</a>.</p>
+        </div>
+    </div>
+</section>
+{% endblock content %}

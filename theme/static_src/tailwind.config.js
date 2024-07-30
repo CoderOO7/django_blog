@@ -51,7 +51,17 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'icon-google': "url('/static/assets/icons/google.svg')",
+                'icon-github': "url('/static/assets/icons/github.svg')",
+                'icon-twitter': "url('/static/assets/icons/twitter.svg')",
+                'icon-linkedin': "url('/static/assets/icons/linkedin.svg')",
+                'icon-user-circle': "url('/static/assets/icons/user-circle.svg')",
+                'icon-pencil': "url('/static/assets/icons/pencil.svg')",
+                'icon-trash': "url('/static/assets/icons/trash.svg')"
+            }
+        },
     },
     variants: {
         extend: {},

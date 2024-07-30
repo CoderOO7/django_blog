@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<article class="post">
+    <div class="post__wrap max-w-4xl mx-auto p-8 mb-4 min-h-40 rounded-xl shadow-lg">
+        <div class="post__meta flex items-center justify-between gap-2">
+            <div class="flex gap-2">
+                <img class=" __meta_author-pic w-10 h-10 rounded-full object-center"
+                     src="{{ object.author.profile.image.url }}"
+                     alt="author pic"
+                     onerror="this.onerror=null; this.src='{% static 'assets/images/user-avatar.jpeg' %}'"
+                />
+                <div class="flex flex-col">
+                    <small>{{object.author.get_full_name}}</small>
+                    <small class="__meta_post-date text-gray-500">{{ object.date_modified}}</small>
+                </div>
+            </div>
+            {% if request.user.id == object.author.id %}
+            <div class="space-x-4">
+                <a class="__meta-post-delete  cursor-pointer"
+                   href="{% url 'post-delete' post.id %}"><span
+                        class="inline-block bg-icon-trash w-5 h-5 "></span></a>
+                <a class="__meta_post-edit text-gray-600 hover:text-gray-700 cursor-pointer"
+                   href="{% url 'post-update' post.id %}"><span class="inline-block w-5 h-5 bg-icon-pencil"></span></a>
+            </div>
+            {% endif %}
+        </div>
+        <h3 class="post__title mt-4 text-2xl font-bold">{{object.title}}</h3>
+        <p class="post__content mt-4">{{object.content|safe}}</p>
+    </div>
+</article>
+{% endblock content %}
